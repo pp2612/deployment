@@ -1,0 +1,20 @@
+name: Build and Publish Demo
+on:
+  push:
+    branches: main
+  pull-request:
+    branches: main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Java 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: "zulu"
+          java-version: "11"
+      - name: Package jar
+        run: mvn clean package -DskipTests
